@@ -39,7 +39,7 @@ public class EvenTimesOddTimes {
         // filter out the numbers that have 1 in the rightmost position,
         // these numbers contain one of the two numbers that appear odd times
         for (int cur : arr) {
-            if ((cur & onlyOne) == 0) {
+            if ((cur & rightMostOne) == 0) {
                 onlyOne ^= cur;
             }
         }
