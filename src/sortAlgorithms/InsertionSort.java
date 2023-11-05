@@ -101,7 +101,7 @@ public class InsertionSort {
             }
         }
 
-        System.out.println(succeed ? "Test finished!" : "This algorithm has a bug!");
+        System.out.println(succeed ? "Test finished!" : "This algorithm has some problems!");
 
         int[] arr = generateRandomArray(maxSize, maxValue);
         printArray(arr);
