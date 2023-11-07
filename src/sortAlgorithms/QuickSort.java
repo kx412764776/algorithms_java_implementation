@@ -32,11 +32,11 @@ public class QuickSort {
         int more = right; // the index using to monitor the > part
         while (left < more) {
             // if the current number is less than the number at the right index
-            // swap the current number with the number at the left index
+            // swap the current number with the number at the less index
             if (arr[left] < arr[right]) {
                 swap(arr, ++less, left++);
                 // if the current number is greater than the number at the right index
-                // swap the current number with the number at the right index
+                // swap the current number with the number at the more index
             } else if (arr[left] > arr[right]) {
                 swap(arr, --more, left);
             } else {
