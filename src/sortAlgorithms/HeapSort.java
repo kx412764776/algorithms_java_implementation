@@ -9,7 +9,7 @@ public class HeapSort {
         if (arr == null || arr.length < 2) return;
 
         // O(N*logN)
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) { // O(N)
             heapInsert(arr, i); // O(logN)
         }
 
@@ -21,9 +21,9 @@ public class HeapSort {
         swap(arr, 0, --heapSize);
 
         // O(N*logN)
-        while (heapSize > 0) {
-            heapify(arr, 0, heapSize);
-            swap(arr, 0, --heapSize);
+        while (heapSize > 0) { // O(N)
+            heapify(arr, 0, heapSize); // O(logN)
+            swap(arr, 0, --heapSize); // O(1)
         }
     }
 
@@ -151,5 +151,135 @@ public class HeapSort {
         printArray(arr);
         heapSort(arr);
         printArray(arr);
+    }
+}
+
+class SortedArrayDistanceLessK {
+    /**
+     * Given a nearly sorted array arr[] of size n, and a number k
+     * If each element is allowed to move at most k positions from its position in the sorted array
+     * k is a positive number which is much smaller than n
+     * Question: Choose one sort algorithm to sort the array
+     */
+    public static void sortedArrayDistanceLessK(int[] arr, int k) {
+        if (k == 0) return;
+
+        // Create a min heap
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        int index = 0;
+
+        // Add the first k numbers to the heap
+        for(; index <= Math.min(arr.length - 1, k - 1); index++) {
+           heap.add(arr[index]);
+        }
+
+        // Add the smallest number in the heap to the array
+        int i = 0;
+        for (; index < arr.length; i++, index++) {
+            heap.add(arr[index]);
+            arr[i] = heap.poll();
+        }
+
+        while (!heap.isEmpty()) {
+            arr[i++] = heap.poll();
+        }
+    }
+
+    // for test
+    public static void comparator(int[] arr, int k) {
+        Arrays.sort(arr);
+    }
+
+    // for test
+    public static int[] randomArrayNoMoveMoreK(int maxSize, int maxValue, int K) {
+        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
+        }
+        // 1. sort the array
+        Arrays.sort(arr);
+        // 2. shuffle the array and make sure each number move no more than K
+        // swap[i] == true, which means i position has been swapped
+        // swap[i] == false, which means i position has not been swapped
+        boolean[] isSwap = new boolean[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            int j = Math.min(i + (int) (Math.random() * (K + 1)), arr.length - 1);
+            if (!isSwap[i] && !isSwap[j]) {
+                isSwap[i] = true;
+                isSwap[j] = true;
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+            }
+        }
+        return arr;
+    }
+
+    // for test
+    public static int[] copyArray(int[] arr) {
+        if (arr == null) {
+            return null;
+        }
+        int[] res = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+    // for test
+    public static boolean isEqual(int[] arr1, int[] arr2) {
+        if ((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null)) {
+            return false;
+        }
+        if (arr1 == null && arr2 == null) {
+            return true;
+        }
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+        for (int i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // for test
+    public static void printArray(int[] arr) {
+        if (arr == null) {
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    // for test
+    public static void main(String[] args) {
+        System.out.println("test begin");
+        int testTime = 500000;
+        int maxSize = 100;
+        int maxValue = 100;
+        boolean succeed = true;
+        for (int i = 0; i < testTime; i++) {
+            int k = (int) (Math.random() * maxSize) + 1;
+            int[] arr = randomArrayNoMoveMoreK(maxSize, maxValue, k);
+            int[] arr1 = copyArray(arr);
+            int[] arr2 = copyArray(arr);
+            sortedArrayDistanceLessK(arr1, k);
+            comparator(arr2, k);
+            if (!isEqual(arr1, arr2)) {
+                succeed = false;
+                System.out.println("K : " + k);
+                printArray(arr);
+                printArray(arr1);
+                printArray(arr2);
+                break;
+            }
+        }
+        System.out.println(succeed ? "This algorithm works!" : "This algorithm has some problems!");
     }
 }
