@@ -9,9 +9,9 @@ public class HeapSort {
         if (arr == null || arr.length < 2) return;
 
         // O(N*logN)
-//        for (int i = 0; i < arr.length; i++) {
-//            heapInsert(arr, i); // O(logN)
-//        }
+        for (int i = 0; i < arr.length; i++) {
+            heapInsert(arr, i); // O(logN)
+        }
 
         // O(N)
         for (int i = arr.length - 1; i >= 0; i--) {
