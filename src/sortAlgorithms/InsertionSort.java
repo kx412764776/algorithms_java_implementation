@@ -9,7 +9,7 @@ public class InsertionSort {
 
         // make sure arr[0] to arr[i] is sorted
         for(int i = 1; i < arr.length; i++) {
-            // compare i with i - 1, if i < i - 1, swap i and i - 1, until i >= i - 1
+            // compare i with i - 1, if i < i - 1, swap arr[i] and arr[i - 1] until arr[i] >= arr[i - 1]
             for(int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
                 swap(arr, j, j + 1);
             }

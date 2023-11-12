@@ -94,7 +94,6 @@ public class BinarySearch {
 
         System.out.println(index == index2);
 
-
     }
 
 }
