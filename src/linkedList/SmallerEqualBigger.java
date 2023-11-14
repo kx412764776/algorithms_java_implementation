@@ -61,7 +61,7 @@ public class SmallerEqualBigger {
         while (index != big) {
             if (nodeArr[index].value < pivot) {
                 swap(nodeArr, ++small, index++);
-            } else if (nodeArr[index].value == index) {
+            } else if (nodeArr[index].value == pivot) {
                 index++;
             } else {
                 swap(nodeArr, --big, index);
@@ -94,7 +94,7 @@ public class SmallerEqualBigger {
                     sH = head;
                     sT = head;
                 } else {
-                    sH.next = head;
+                    sT.next = head;
                     sT = head;
                 }
             } else if (head.value == pivot) {
@@ -102,7 +102,7 @@ public class SmallerEqualBigger {
                     eH = head;
                     eT = head;
                 } else {
-                    eH.next = head;
+                    eT.next = head;
                     eT = head;
                 }
             } else {
@@ -110,7 +110,7 @@ public class SmallerEqualBigger {
                     bH = head;
                     bT = head;
                 } else {
-                    bH.next = head;
+                    bT.next = head;
                     bT = head;
                 }
             }
