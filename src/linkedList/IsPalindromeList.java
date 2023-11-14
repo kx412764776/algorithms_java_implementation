@@ -65,7 +65,7 @@ public class IsPalindromeList {
         slow.next = null;// mid.next -> null
         Node node = null;
         while (fast != null) {
-            node = fast.next; // prev -> save next node
+            node = fast.next; // node -> save next node
             fast.next = slow; // reverse right part node
             // move slow and fast pointer to next node
             slow = fast;
