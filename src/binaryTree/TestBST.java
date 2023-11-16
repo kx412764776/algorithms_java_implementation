@@ -40,7 +40,6 @@ public class TestBST {
      */
     public static boolean isBST2(Node head) {
         if (head != null) {
-            int preValue = Integer.MIN_VALUE;
             Stack<Node> stack = new Stack<>();
             while (!stack.isEmpty() || head != null) {
                 if (head != null) {
@@ -58,6 +57,58 @@ public class TestBST {
             }
         }
         return true;
+    }
+
+    public static boolean isBST3(Node head) {
+        if (head == null) return true;
+        return process(head).isBST;
+    }
+
+    public static class Info {
+        public boolean isBST;
+        public int max;
+        public int min;
+        public Info(boolean isBST, int max, int min) {
+            this.isBST = isBST;
+            this.max = max;
+            this.min = min;
+        }
+    }
+
+    public static Info process(Node head) {
+        if (head == null) return null;
+
+        Info leftInfo = process(head.left);
+        Info rightInfo = process(head.right);
+        int max = head.value;
+        if (leftInfo != null) {
+            max = Math.max(max, leftInfo.max);
+        }
+        if (rightInfo != null) {
+            max = Math.max(max, rightInfo.max);
+        }
+        int min = head.value;
+        if (leftInfo != null) {
+            min = Math.min(min, leftInfo.min);
+        }
+        if (rightInfo != null) {
+            min = Math.min(min, rightInfo.min);
+        }
+        boolean isBST = true;
+        if (leftInfo != null && !leftInfo.isBST) {
+            isBST = false;
+        }
+        if (rightInfo != null && !rightInfo.isBST) {
+            isBST = false;
+        }
+        if (leftInfo != null && leftInfo.max >= head.value) {
+            isBST = false;
+        }
+        if (rightInfo != null && rightInfo.min <= head.value) {
+            isBST = false;
+        }
+        return new Info(isBST, max, min);
+
     }
 
     // for test
@@ -83,10 +134,10 @@ public class TestBST {
         for (int i = 0; i < testTimes; i++) {
             preValue = Integer.MIN_VALUE;
             Node head = generateRandomBST(maxLevel, maxValue);
-            if (isBST1(head) != isBST2(head)) {
+            if (isBST3(head) != isBST2(head)) {
                 System.out.println("Test failed!");
             }
         }
-        System.out.println("Test finished!");
+        System.out.println("Test success!");
     }
 }
