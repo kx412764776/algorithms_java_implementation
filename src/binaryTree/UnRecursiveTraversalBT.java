@@ -52,7 +52,7 @@ public class UnRecursiveTraversalBT {
         System.out.println();
     }
 
-    public static void posOrderUnRecur (Node head) {
+    public static void posOrderUnRecur(Node head) {
         System.out.println("post-order: ");
 
         if (head != null) {
