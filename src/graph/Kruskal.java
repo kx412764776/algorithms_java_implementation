@@ -3,6 +3,7 @@ package graph;
 import java.util.*;
 
 // undirected graph only
+// used for finding the minimum spanning tree
 public class Kruskal {
 
     public static class MySets{
