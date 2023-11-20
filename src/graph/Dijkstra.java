@@ -26,24 +26,27 @@ public class Dijkstra {
                 Node toNode = edge.to;
                 if (!distanceMap.containsKey(toNode)) {
                     distanceMap.put(toNode, distance + edge.weight);
-                } else {
-                    distanceMap.put(toNode, Math.min(distanceMap.get(toNode), distance + edge.weight));
                 }
+                distanceMap.put(
+                        edge.to,
+                        Math.min((distanceMap.get(toNode)), distance + edge.weight)
+                );
             }
             visitedNodes.add(minNode);
             minNode = getMinDistanceAndUnvisitedNode(distanceMap, visitedNodes);
         }
         return distanceMap;
+
     }
 
-    private static Node getMinDistanceAndUnvisitedNode(HashMap<Node, Integer> distanceMap, HashSet<Node> visited) {
+    private static Node getMinDistanceAndUnvisitedNode(HashMap<Node, Integer> distanceMap, HashSet<Node> visitedNodes) {
         Node minNode = null;
         int minDistance = Integer.MAX_VALUE;
 
         for (Entry<Node, Integer> entry : distanceMap.entrySet()) {
             Node node = entry.getKey();
             int distance = entry.getValue();
-            if (!visited.contains(node) && distance < minDistance) {
+            if (!visitedNodes.contains(node) && distance < minDistance) {
                 minNode = node;
                 minDistance = distance;
             }
