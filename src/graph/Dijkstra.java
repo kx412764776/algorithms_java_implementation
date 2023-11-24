@@ -94,15 +94,13 @@ public class Dijkstra {
                 distanceMap.put(node, distance);
                 insertHeapify(node, size++);
             }
-            // ignore
         }
 
         public NodeRecord pop() {
             NodeRecord nodeRecord = new NodeRecord(nodes[0], distanceMap.get(nodes[0]));
-            swap(0, size - 1); // 0 > size - 1    size - 1 > 0
+            swap(0, size - 1);
             heapIndexMap.put(nodes[size - 1], -1);
             distanceMap.remove(nodes[size - 1]);
-            // free C++同学还要把原本堆顶节点析构，对java同学不必
             nodes[size - 1] = null;
             heapify(0, --size);
             return nodeRecord;
@@ -116,18 +114,19 @@ public class Dijkstra {
         }
 
         private void heapify(int index, int size) {
-            int left = index * 2 + 1;
-            while (left < size) {
-                int smallest = left + 1 < size && distanceMap.get(nodes[left + 1]) < distanceMap.get(nodes[left])
-                        ? left + 1
-                        : left;
-                smallest = distanceMap.get(nodes[smallest]) < distanceMap.get(nodes[index]) ? smallest : index;
-                if (smallest == index) {
-                    break;
-                }
+            int leftChildIndex = (index * 2) + 1;
+            while (leftChildIndex < size) {
+                int smallest =
+                        distanceMap.get(nodes[leftChildIndex + 1]) < distanceMap.get(nodes[leftChildIndex]) ?
+                                leftChildIndex + 1 : leftChildIndex;
+                smallest = distanceMap.get(nodes[smallest]) < distanceMap.get(nodes[index]) ?
+                        smallest : index;
+
+                if (smallest == index) break;
+
                 swap(smallest, index);
                 index = smallest;
-                left = index * 2 + 1;
+                leftChildIndex = index * 2 + 1;
             }
         }
 
@@ -152,6 +151,7 @@ public class Dijkstra {
         NodeHeap nodeHeap = new NodeHeap(size);
         nodeHeap.addOrUpdateOrIgnore(head, 0);
         HashMap<Node, Integer> result = new HashMap<>();
+
         while (!nodeHeap.isEmpty()) {
             NodeRecord record = nodeHeap.pop();
             Node cur = record.node;
