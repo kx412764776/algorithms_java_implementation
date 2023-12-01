@@ -63,5 +63,9 @@ public class UnionFind {
                 }
             }
         }
+
+        public int getSetNum() {
+            return sizeMap.size();
+        }
     }
 }
