@@ -1,5 +1,11 @@
 package other;
 
+/**
+ * KMP algorithm
+ * find the first index of str2 in str1
+ * if not found, return -1
+ * if found, return the first index
+ */
 public class KMP {
 
     public static int getIndexOf(String str1, String str2) {
