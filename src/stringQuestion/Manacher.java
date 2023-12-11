@@ -28,7 +28,7 @@ public class Manacher {
             palindromeRadiusArr[i] = right > i ?
                     Math.min(palindromeRadiusArr[2 * center - i], right - i) : 1;
             // expand the radius of palindrome at i
-            while (i + palindromeRadiusArr[i] < str.length && i -palindromeRadiusArr[i] > -1) {
+            while (i + palindromeRadiusArr[i] < str.length && i - palindromeRadiusArr[i] > -1) {
                 // if the character at i + radius(palindrome) is the same as the character at i - radius,
                 // the radius of palindrome at i is increased by 1
                 // otherwise, break the loop
