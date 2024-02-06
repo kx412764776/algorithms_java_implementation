@@ -10,7 +10,7 @@ package topInterview150;
  */
 public class MergeSortedArray {
 
-    public void merge(int[] nums1, int m, int[] nums2, int n) {
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
         int p1 = m - 1;
         int p2 = n - 1;
 
@@ -27,10 +27,10 @@ public class MergeSortedArray {
 
     // Test Case
     public static void main(String[] args) {
-        MergeSortedArray solution = new MergeSortedArray();
+
         int[] nums1 = new int[]{1, 2, 3, 0, 0, 0};
         int[] nums2 = new int[]{2, 5, 6};
-        solution.merge(nums1, 3, nums2, 3);
+        merge(nums1, 3, nums2, 3);
         for (int num : nums1) {
             System.out.print(num + " ");
         }
