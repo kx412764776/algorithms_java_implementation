@@ -1,11 +1,11 @@
-package topInterview150;
+package topInterview150.array;
 
 /**
  * Question: 88. Merge Sorted Array
  * Given two sorted integer arrays nums1 and nums2,
  * two integers m and n representing the number of elements in nums1 and nums2 respectively.
  * Merge nums1 and nums2 into a single sorted array.
- * The final sorted array should store in nums1.
+ * The final sorted array should store in nums1.<br>
  * {@code @Link} <a href="https://leetcode.com/problems/merge-sorted-array/">Merge Sorted Array</a>
  */
 public class MergeSortedArray {

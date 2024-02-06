@@ -1,9 +1,9 @@
-package topInterview150;
+package topInterview150.array;
 
 /**
  * Question: 27. Remove Element
  * Given an integer array nums and an integer val, remove all occurrences of val in nums in-place.
- * return the remaining count of numbers after removing the val.
+ * return the remaining count of numbers after removing the val.<br>
  * {@code @Link:} <a href="https://leetcode.com/problems/remove-element/">Remove Element</a>
  */
 public class RemoveElement {
